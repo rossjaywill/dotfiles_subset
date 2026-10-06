@@ -1,0 +1,395 @@
+{
+    "for": {
+        "prefix": "for",
+        "body": [
+            "for (${1:size_t} ${2:i} = ${3:0}; $2 < ${4:length}; $2++) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Code snippet for 'for' loop"
+    },
+    "forr": {
+        "prefix": "for_reverse",
+        "body": [
+            "for (${1:size_t} ${2:i} = ${3:length} - 1; $2 >= ${4:0}; $2--) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Code snippet for reverse 'for' loop"
+    },
+    "do": {
+        "prefix": "do",
+        "body": ["do {", "    $0", "} while($1);"],
+        "description": "Code snippet for do...while loop"
+    },
+    "while": {
+        "prefix": "while",
+        "body": ["while ($1) {", "    $2", "}"],
+        "description": ""
+    },
+    "foreach": {
+        "prefix": "foreach",
+        "body": [
+            "for(${1:auto&&} ${2:var} : ${3:collection_to_loop}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Code snippet for range-based for loop (c++11) statement"
+    },
+    "if": {
+        "prefix": "if",
+        "body": ["if ($1) {", "    $0", "}"],
+        "description": "Code snippet for if statement"
+    },
+    "else": {
+        "prefix": "else",
+        "body": ["else {", "    $0", "}"],
+        "description": "Code snippet for else statement"
+    },
+    "else if": {
+        "prefix": "else if",
+        "body": ["else if ($1) {", "    $0", "}"],
+        "description": "Code snippet for else-if statement"
+    },
+    "enum": {
+        "prefix": "enum",
+        "body": ["enum ${1:MyEnum} {", "    $0", "};"],
+        "description": "Code snippet for enum"
+    },
+    "enum class": {
+        "prefix": "enum class",
+        "body": ["enum class ${1:MyClass} {$0};"],
+        "description": "Code snippet for enum class (c++11)"
+    },
+    "class": {
+        "prefix": "class",
+        "body": [
+            "class ${1:MyClass} {",
+            "public:",
+            "    $1();",
+            "    $1($1 &&) = default;",
+            "    $1(const $1 &) = default;",
+            "    $1 &operator=($1 &&) = default;",
+            "    $1 &operator=(const $1 &) = default;",
+            "    ~$1();",
+            "",
+            "private:",
+            "    $2",
+            "};",
+            "",
+            "$1::$1() {",
+            "}",
+            "",
+            "$1::~$1() {",
+            "}"
+        ],
+        "description": "Code snippet for class"
+    },
+    "eclass": {
+        "prefix": "class_empty",
+        "body": [
+            "class ${1:MyClass} {",
+            "public:",
+            "    $2",
+            "private:",
+            "    $3",
+            "};",
+            ""
+        ],
+        "description": "Code snippet for empty class"
+    },
+    "classi": {
+        "prefix": "class_inline",
+        "body": [
+            "class ${1:MyClass} {",
+            "public:",
+            "    $1() = default;",
+            "    $1($1 &&) = default;",
+            "    $1(const $1 &) = default;",
+            "    $1 &operator=($1 &&) = default;",
+            "    $1 &operator=(const $1 &) = default;",
+            "    ~$1() = default;",
+            "",
+            "private:",
+            "    $2",
+            "};"
+        ],
+        "description": "Code snippet for class with inline constructor/destructor"
+    },
+    "namespace": {
+        "prefix": "namespace",
+        "body": ["namespace ${1:MyNamespace} {", "    $0", "}"]
+    },
+    "struct": {
+        "prefix": "struct",
+        "body": ["struct ${1:MyStruct} {", "    $0", "};"],
+        "description": "Code snippet for struct"
+    },
+    "switch": {
+        "prefix": "switch",
+        "body": [
+            "switch (${1:switch_on})",
+            "{",
+            "case ${2:cond}:",
+            "{",
+            "    ${3:expr}",
+            "    break;",
+            "}",
+            "case ${4:cond}:",
+            "{",
+            "    ${5:expr}",
+            "    break;",
+            "}",
+            "default:",
+            "    $0",
+            "    break;",
+            "}"
+        ],
+        "description": "Code snippet for switch statement"
+    },
+    "try": {
+        "prefix": "try",
+        "body": [
+            "try {",
+            "    ",
+            "}",
+            "catch (const std::exception&) {",
+            "    $1",
+            "}"
+        ],
+        "description": "Code snippet for try catch"
+    },
+    "cout": {
+        "prefix": "std_cout",
+        "body": ["std::cout << \"${1:message}\" << '\\n';"],
+        "description": "Code snippet for printing to std::cout, provided the header is set"
+    },
+    "cin": {
+        "prefix": "std_cin",
+        "body": ["std::cin >> $1;"],
+        "description": "Code snippet for std::cin, provided the header is set"
+    },
+    "Main function template": {
+        "prefix": "main",
+        "body": [
+            "int main (int argc, char *argv[]) {",
+            "    $1",
+            "    return 0;",
+            "}"
+        ],
+        "description": "A standard main function for a C++ program"
+    },
+    "Lambda function": {
+        "prefix": "lambda",
+        "body": [
+            "[&](${1:parameters}) -> ${2:return_type} {",
+            "    ${3:body}",
+            "}"
+        ],
+        "description": "Lambda function"
+    },
+    "std::unique_ptr": {
+        "prefix": "unique_ptr",
+        "body": [
+            "auto ${2:variable_name} = std::make_unique<${1:type}>(${3:constructor_args});"
+        ],
+        "description": "std::unique_ptr"
+    },
+    "std::shared_ptr": {
+        "prefix": "shared_ptr",
+        "body": [
+            "auto ${2:variable_name} = std::make_shared<${1:type}>(${3:constructor_args});"
+        ],
+        "description": "std::shared_ptr"
+    },
+    "Range-based for loop": {
+        "prefix": "for_range",
+        "body": [
+            "for (auto&& ${1:element} : ${2:collection}) {",
+            "    ${3:loop_body}",
+            "}"
+        ],
+        "description": "Range-based for loop"
+    },
+    "std::tie for multiple variable assignment": {
+        "prefix": "tie",
+        "body": [
+            "std::tie(${1:variables}) = ${2:tuple_expression};"
+        ],
+        "description": "std::tie for multiple variable assignment"
+    },
+    "std::optional": {
+        "prefix": "opt",
+        "body": [
+            "std::optional<${1:type}> ${2:variable_name};"
+        ],
+        "description": "std::optional"
+    },
+    "Structured bindings": {
+        "prefix": "structbind",
+        "body": [
+            "auto [${1:variables}] = ${2:expression};"
+        ],
+        "description": "Structured bindings"
+    },
+    "Custom delete for std::unique_ptr": {
+        "prefix": "unique_ptr_custom_delete",
+        "body": [
+            "std::unique_ptr<${1:type}, ${2:deleter_type}> ${3:variable_name}(${4:initial_value}, ${5:deleter_function});"
+        ],
+        "description": "Custom delete for std::unique_ptr"
+    },
+        "std::transform": {
+        "prefix": "transform",
+        "body": [
+            "std::transform(${1:input_start}.begin()), ${2:input_end}.end(), ${3:output_start},",
+            "   [](${4:auto}&& ${5:element}) {",
+            "       return ${6:expr};",
+            "   });"
+        ],
+        "description": "std::transform"
+    },
+    "std::visit": {
+        "prefix": "visit",
+        "body": [
+            "std::visit([](auto&& arg) {",
+            "    using T = std::decay_t<decltype(arg)>;",
+            "    // handle case for type T",
+            "}, ${1:variant_instance});"
+        ],
+        "description": "std::visit"
+    },
+    "Concept definition": {
+        "prefix": "concept",
+        "body": [
+            "template <typename ${1:T}>",
+            "concept ${2:ConceptName} = ",
+            "${3:// Concept conditions e.g., std::integral<${1:T}>;}"
+        ],
+        "description": "Define a custom concept"
+    },
+    "Concept Usage": {
+        "prefix": "cpp_concept",
+        "body": [
+            "template<typename T>",
+            "concept ${1:ConceptName} = requires(T x) {",
+            "    { x.${2:method}() } -> std::same_as<${3:ReturnType}>;",
+            "};",
+            "",
+            "template<${1:ConceptName} T>",
+            "void function(T& value) {",
+            "    ${0:// function body}",
+            "}"
+        ],
+        "description": "Define a concept and use it to constrain a function template"
+    },
+    "Function with constraints": {
+        "prefix": "requires",
+        "body": [
+            "template <typename ${1:T}>",
+            "requires ${2:ConceptName}<${1:T}>",
+            "${3:ReturnType} ${4:functionName}(${1:T} ${5:value}) {",
+            "    ${6:// Function implementation}",
+            "}"
+        ],
+        "description": "Define a function with concept constraints"
+    },
+    "std::ranges::transform": {
+        "prefix": "range_transform",
+        "body": [
+            "${1:OutputType} transformed = ${2:InputCollection} | std::views::transform([](const auto& ${3:item}) {",
+            "    return ${4:// Transformation logic};",
+            "});"
+        ],
+        "description": "std::ranges::transform"
+    },
+    "std::ranges::filter": {
+        "prefix": "range_filter",
+        "body": [
+            "${1:OutputType} filtered = ${2:InputCollection} | std::views::filter([](const auto& ${3:item}) {",
+            "    return ${4:// Predicate logic};",
+            "});"
+        ],
+        "description": "std::ranges::filter"
+    },
+    "std::ranges::sort": {
+        "prefix": "range_sort",
+        "body": [
+            "std::ranges::sort(${1:collection}, [](const auto& ${2:a}, const auto& ${3:b}) {",
+            "    return ${4:// Comparison logic};",
+            "});"
+        ],
+        "description": "std::ranges::sort"
+    },
+    "C++23 Coroutine": {
+        "prefix": "cpp23_coroutine",
+        "body": [
+            "#include <coroutine>",
+            "",
+            "std::generator<int> ${1:coroutineName}() {",
+            "    co_yield ${2:initialValue};",
+            "    ${0:// continue your coroutine logic}",
+            "}"
+        ],
+        "description": "Set up a basic coroutine using C++23's <coroutine> header"
+    },
+    "C++23 Custom Coroutine": {
+        "prefix": "cpp23_custom_coroutine",
+        "body": [
+            "#include <coroutine>",
+            "",
+            "template <typename T>",
+            "struct task {",
+            "    struct promise_type;",
+            "    using handle_type = std::coroutine_handle<promise_type>;",
+            "",
+            "    struct promise_type {",
+            "        T value;",
+            "        auto get_return_object() { return task(handle_type::from_promise(*this)); }",
+            "        std::suspend_never initial_suspend() { return {}; }",
+            "        std::suspend_never final_suspend() noexcept { return {}; }",
+            "        void return_value(T v) { value = v; }",
+            "        void unhandled_exception() { std::terminate(); }",
+            "    };",
+            "",
+            "    task(handle_type h) : handle(h) {}",
+            "    ~task() { if (handle) handle.destroy(); }",
+            "    T await_resume() { return handle.promise().value; }",
+            "    bool await_ready() const noexcept { return false; }",
+            "    void await_suspend(handle_type) const noexcept {}",
+            "",
+            "    handle_type handle;",
+            "};",
+            "",
+            "task<int> ${1:asyncFunctionName}() {",
+            "    co_return ${2:returnValue};",
+            "}",
+            "",
+            "${0:// Use your coroutine function}"
+        ],
+        "description": "Set up a custom coroutine type and function using C++23's <coroutine> header"
+    },
+    "Fold Expressions": {
+        "prefix": "cpp_fold_expr",
+        "body": [
+            "template<typename... Args>",
+            "auto sum(Args... args) {",
+            "    return (... + args);",
+            "}",
+            "",
+            "${0:// use the fold expression}"
+        ],
+        "description": "Use fold expressions to operate on variadic template arguments"
+    },
+    "Constexpr If": {
+        "prefix": "cpp_constexpr_if",
+        "body": [
+            "if constexpr (${1:condition}) {",
+            "    ${2:// true branch}",
+            "} else {",
+            "    ${3:// false branch}",
+            "}"
+        ],
+        "description": "Use C++17's constexpr if for compile-time branching"
+    }
+}

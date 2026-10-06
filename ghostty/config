@@ -1,0 +1,13 @@
+font-family = "CommitMono Nerd Font"
+font-size = 12
+font-style-bold = false
+
+theme = Rose Pine Moon
+background-opacity = 0.96
+
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+
+mouse-hide-while-typing = true
+confirm-close-surface = false
+app-notifications = no-clipboard-copy

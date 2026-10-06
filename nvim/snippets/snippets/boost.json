@@ -1,0 +1,210 @@
+{
+    "Boost MultiIndex Container": {
+        "prefix": "boost_multiindex",
+        "body": [
+            "struct ${1:first_tag} {};",
+            "struct ${2:second_tag} {};",
+            "",
+            "using ${10:container_name} = boost::multi_index_container<",
+            "    ${3:YourStructName},",
+            "    boost::multi_index::indexed_by<",
+            "        boost::multi_index::ordered_unique<",
+            "            boost::multi_index::tag<${1:first_tag}>,",
+            "            boost::multi_index::member<${2:YourStructName}, ${3:std::string}, &${4:YourStructName}::${5:member_name}>",
+            "        >,",
+            "        boost::multi_index::ordered_non_unique<",
+            "            boost::multi_index::tag<${7:second_tag}>,",
+            "            boost::multi_index::member<${3:YourStructName}, ${9:int}, &${3:YourStructName}::${8:member_age}>",
+            "        >",
+            "    >",
+            ">;"
+        ]
+    },
+    "Boost Intrusive List": {
+        "prefix": "boost_intrusive_list",
+        "body": [
+            "class ${1:YourClassName} : public boost::intrusive::list_base_hook<>",
+            "{",
+            "public:",
+            "    ${2:int} data;",
+            "};",
+            "",
+            "using ${3:IntrusiveListName} = boost::intrusive::list<${1:YourClassName}>;"
+        ]
+    },
+    "Boost Circular Buffer": {
+        "prefix": "boost_circular_buffer",
+        "body": [
+            "using ${1:BufferTypeName} = boost::circular_buffer<${2:YourItemTypeName}>;",
+            "${1:BufferTypeName} ${3:bufferVarName}(${4:size});"
+        ]
+    },
+    "Boost Bimap": {
+        "prefix": "boost_bimap",
+        "body": [
+            "using ${1:YourBimapType} = boost::bimaps::bimap<${2:LeftType}, ${3:RightType}>;",
+            "${1:YourBimapType} ${4:bimapVarName};",
+            "${4:bimapVarName}.left.insert(std::make_pair(${5:leftValue}, ${6:rightValue}));"
+        ]
+    },
+    "Boost Property Tree": {
+        "prefix": "boost_property_tree",
+        "body": [
+            "boost::property_tree::ptree ${1:ptreeVarName};",
+            "${1:ptreeVarName}.put(\"${2:path.to.property}\", ${3:value});",
+            "boost::property_tree::write_json(\"${4:filename}.json\", ${1:ptreeVarName});"
+        ]
+    },
+    "Boost Flat Map": {
+        "prefix": "boost_flat_map",
+        "body": [
+            "using ${1:MapName} = boost::container::flat_map<${2:KeyType}, ${3:ValueType}>;",
+            "${1:MapName} ${4:mapVarName};",
+            "${4:mapVarName}.emplace(${5:key}, ${6:value});"
+        ],
+        "description": "Creates a boost::container::flat_map and inserts a key-value pair"
+    },
+    "Boost Option": {
+        "prefix": "boost_popt",
+        "body": [
+            "boost::program_options::options_description desc(\"Options\");",
+            "desc.add_options()",
+            "    (\"${1:optionName}\", boost::program_options::value<${2:ValueType}>(), \"${3:Option description}\");",
+            "",
+            "boost::program_options::variables_map vm;",
+            "boost::program_options::store(boost::program_options::parse_command_line(${4:argc}, ${5:argv}, desc), vm);",
+            "boost::program_options::notify(vm);"
+        ],
+        "description": "Defines a command-line option using boost::program_options"
+    },
+    "Boost Graph": {
+        "prefix": "boost_graph",
+        "body": [
+            "using Graph = boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS>;",
+            "Graph ${1:graphVarName};",
+            "auto ${2:edge} = boost::add_edge(${3:vertex1}, ${4:vertex2}, ${1:graphVarName});"
+        ],
+        "description": "Initial setup for a basic undirected graph using BGL"
+    },
+    "Boost Asio Basic Socket": {
+        "prefix": "boost_asio_socket",
+        "body": [
+            "boost::asio::io_context io;",
+            "boost::asio::ip::tcp::socket socket(io);",
+            "${0:// Use the socket for async operations}"
+        ],
+        "description": "Set up a basic Boost.Asio TCP socket"
+    },
+    "Boost Asio TCP Server": {
+        "prefix": "boost_asio_tcp_server",
+        "body": [
+            "boost::asio::io_context io;",
+            "boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::tcp::v4(), ${1:port_number});",
+            "boost::asio::ip::tcp::acceptor acceptor(io, endpoint);",
+            "",
+            "void start_accept() {",
+            "    auto socket = std::make_shared<boost::asio::ip::tcp::socket>(io);",
+            "    acceptor.async_accept(*socket, [socket](boost::system::error_code ec) {",
+            "        if (!ec) {",
+            "            ${0:// handle the new connection}",
+            "        }",
+            "        start_accept();",
+            "    });",
+            "}",
+            "",
+            "start_accept();",
+            "io.run();"
+        ],
+        "description": "Set up a basic Boost.Asio TCP server"
+    },
+    "Boost Asio TCP Client": {
+        "prefix": "boost_asio_tcp_client",
+        "body": [
+            "boost::asio::io_context io;",
+            "boost::asio::ip::tcp::resolver resolver(io);",
+            "auto endpoints = resolver.resolve(${1:\"host_name\"}, ${2:\"service_name\"});",
+            "boost::asio::ip::tcp::socket socket(io);",
+            "boost::asio::connect(socket, endpoints);",
+            "${0:// Communicate with the server}"
+        ],
+        "description": "Set up a basic Boost.Asio TCP client"
+    },
+    "Boost Asio UDP Server": {
+        "prefix": "boost_asio_udp_server",
+        "body": [
+            "boost::asio::io_context io;",
+            "boost::asio::ip::udp::socket socket(io, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), ${1:port_number}));",
+            "",
+            "void start_receive() {",
+            "    auto data = std::make_shared<std::array<char, ${2:1024}>();",
+            "    socket.async_receive_from(boost::asio::buffer(*data), sender_endpoint,",
+            "                              [data](boost::system::error_code ec, std::size_t bytes_recvd) {",
+            "        if (!ec && bytes_recvd > 0) {",
+            "            ${0:// Handle the received data}",
+            "        }",
+            "        start_receive();",
+            "    });",
+            "}",
+            "",
+            "start_receive();",
+            "io.run();"
+        ],
+        "description": "Set up a basic Boost.Asio UDP server"
+    },
+    "Boost Asio UDP Client": {
+        "prefix": "boost_asio_udp_client",
+        "body": [
+            "boost::asio::io_context io;",
+            "boost::asio::ip::udp::resolver resolver(io);",
+            "auto endpoints = resolver.resolve(boost::asio::ip::udp::v4(), ${1:\"host_name\"}, ${2:\"service_name\"});",
+            "boost::asio::ip::udp::socket socket(io);",
+            "socket.open(boost::asio::ip::udp::v4());",
+            "${0:// Send and receive data via the socket}"
+        ],
+        "description": "Set up a basic Boost.Asio UDP client"
+    },
+    "Boost Test Case": {
+        "prefix": "boost_test_case",
+        "body": [
+            "BOOST_AUTO_TEST_CASE(${1:test_case_name}) {",
+            "    ${0:// Test assertions here}",
+            "}"
+        ],
+        "description": "Define a simple test case with Boost.Test"
+    },
+    "Boost Test Case with Fixture": {
+        "prefix": "boost_test_case_fixture",
+        "body": [
+            "struct ${1:FixtureName} {",
+            "    ${1:FixtureName}() {",
+            "        ${2:// Setup code}",
+            "    }",
+            "    ~${1:FixtureName}() {",
+            "        ${3:// Teardown code}",
+            "    }",
+            "};",
+            "",
+            "BOOST_FIXTURE_TEST_CASE(${4:test_case_name}, ${1:FixtureName}) {",
+            "    ${0:// Test assertions here}",
+            "}"
+        ],
+        "description": "Define a test case with a fixture in Boost.Test"
+    },
+    "Boost Test Suite": {
+        "prefix": "boost_test_suite",
+        "body": [
+            "BOOST_AUTO_TEST_SUITE(${1:suite_name})",
+            "",
+            "BOOST_AUTO_TEST_CASE(${2:test_case_name_1}) {",
+            "    ${3:// Test assertions for test_case_name_1}",
+            "}",
+            "",
+            "BOOST_AUTO_TEST_CASE(${4:test_case_name_2}) {",
+            "    ${5:// Test assertions for test_case_name_2}",
+            "}",
+            "",
+            "BOOST_AUTO_TEST_SUITE_END()"
+        ],
+        "description": "Define a test suite with multiple test cases"
+    }
+}

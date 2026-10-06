@@ -1,0 +1,35 @@
+[core]
+  editor = nvim
+  pager = delta --color-only --light
+  compress = -1
+  compression = -1
+  fsmonitor = true
+[delta]
+  side-by-side = true
+  theme = Github
+  light = true
+  line-numbers = true
+  navigate = true
+[color]
+  ui = true
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+[mergetool "nvim"]
+  cmd = nvim -c DiffviewOpen
+[merge]
+  tool = nvim
+[mergetool]
+  prompt = true
+[svn]
+  rmdir = true
+[pull]
+   rebase = true
+[status]
+  relativePaths = true
+[init]
+  defaultBranch = main
+[fetch]
+  prune = true

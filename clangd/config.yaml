@@ -1,0 +1,18 @@
+CompileFlags:
+  Add: [-std=c++23, -xc++, -Weverything, -Wno-c++98-compat, -Wno-c++98-compat-pedantic,
+        -Wno-padded, -Wno-global-constructors, -Wno-exit-time-destructors, -Wno-used-but-marked-unused,
+        -Wno-disabled-macro-expansion, -Wno-missing-prototypes, -Wno-sign-conversion,
+        -Wno-weak-vtables, -Wno-switch-default, -Wno-covered-switch-default, -Wno-pragma-pack,
+        -Wno-gnu-zero-variadic-macro-arguments, -Wno-undefined-func-template, -Wno-deprecated-copy,
+        -Wno-reserved-macro-identifier, -Wno-reserved-identifier, -Wno-shadow-field-in-constructor,
+        -Wno-implicit-int-float-conversion, -Wno-implicit-int-conversion, -Wno-shorten-64-to-32,
+        -Wtypename-missing, -Wblock-capture-autoreleasing, -Wc++20-extensions, -Wno-extra-semi,
+        -Wno-extra-semi-stmt]
+  Remove: [-W*]
+
+Diagnostics:
+  UnusedIncludes: Strict
+  Suppress: ["pp_including_mainfile_in_preamble", "warn_pp_undef_identifier"]
+
+# InlayHints:
+#   DeducedTypes: Yes

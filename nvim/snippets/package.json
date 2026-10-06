@@ -1,0 +1,19 @@
+{
+    "name": "rjw_snips",
+    "contributes": {
+        "snippets": [
+            {
+                "language": "cpp",
+                "path": "./snippets/cpp.json"
+            },
+            {
+                "language": "cpp",
+                "path": "./snippets/boost.json"
+            },
+            {
+                "language": "cpp",
+                "path": "./snippets/patterns.json"
+            }
+        ]
+    }
+}
